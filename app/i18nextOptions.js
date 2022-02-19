@@ -3,6 +3,6 @@ export default {
   supportedLngs: ["en", "de"],
   defaultNS: "index",
   fallbackLng: "en",
-  react: { useSuspense: false, bindI18nStore: 'added' },
+  react: { useSuspense: false },
   resources: {} // prevents init warning
 }

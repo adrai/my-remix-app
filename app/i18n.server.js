@@ -1,6 +1,7 @@
 import { RemixI18Next } from "remix-i18next";
 import { FileSystemBackend, FetchBackend } from "remix-i18next";
 import i18nextOptions from "./i18nextOptions";
+import { createCookie } from "@remix-run/server-runtime";
 
 // import LocizeBackend from "i18next-locize-backend";
 // class LocizeBackend {
@@ -32,4 +33,5 @@ const backend = new FileSystemBackend("./public/locales");
 export default new RemixI18Next(backend, {
   fallbackLng: i18nextOptions.fallbackLng, // here configure your default (fallback) language
   supportedLanguages: i18nextOptions.supportedLngs, // here configure your supported languages
+  cookie: createCookie("locale") // check also for cookie
 });

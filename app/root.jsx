@@ -6,7 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
   json,
-  useLoaderData
+  useLoaderData,
+  createCookie
 } from "remix";
 import { useRemixI18Next } from "remix-i18next";
 import remixI18n from "~/i18n.server";
@@ -16,7 +17,21 @@ export const loader = async ({ request }) => {
   const locale = await remixI18n.getLocale(request);
   const t = await remixI18n.getFixedT(request, 'common');
   const title = t("headTitle");
-  return json({ locale, title });
+  const lngInQuery = (new URL(request.url)).searchParams.get("lng");
+  let options = {};
+  if (lngInQuery) { // on language change vie lng search param, save selection to cookie
+    options.headers = {
+      "Set-Cookie": await createCookie('locale').serialize(lngInQuery)
+    };
+  }
+  return json({ locale, title }, options);
+
+  // return new Response(pdf, {
+  //   status: 200,
+  //   headers: {
+  //     "Content-Type": "application/pdf"
+  //   }
+  // });
 };
 
 export function meta({ data }) {

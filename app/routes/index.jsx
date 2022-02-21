@@ -25,6 +25,15 @@ export default function Index() {
           <Link to="/second">second</Link>
         </li>
       </ul>
+      {/*Object.keys(lngs).map((lng) => (
+        <button
+          key={lng}
+          style={{ marginRight: 5, fontWeight: locale === lng ? 'bold' : 'normal' }}
+          onClick={() => i18n.changeLanguage(lng)} // do not use i18n.changeLanguage() because in client translations of other languages are not provided
+        >
+          {lngs[lng].nativeName}
+        </button>
+      ))*/}
       {Object.keys(lngs).map((lng) => (
         <Link
           key={lng}

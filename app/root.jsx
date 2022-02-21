@@ -25,13 +25,6 @@ export const loader = async ({ request }) => {
     };
   }
   return json({ locale, title }, options);
-
-  // return new Response(pdf, {
-  //   status: 200,
-  //   headers: {
-  //     "Content-Type": "application/pdf"
-  //   }
-  // });
 };
 
 export function meta({ data }) {

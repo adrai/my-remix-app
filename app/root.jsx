@@ -9,21 +9,23 @@ import {
   useLoaderData
 } from "remix";
 import { useRemixI18Next } from "remix-i18next";
-import i18n from "~/i18n.server";
+import remixI18n from "~/i18n.server";
 import { useTranslation } from "react-i18next";
 
-export let loader = async ({ request }) => {
-  let locale = await i18n.getLocale(request);
-  return json({ locale });
+export const loader = async ({ request }) => {
+  const locale = await remixI18n.getLocale(request);
+  const t = await remixI18n.getFixedT(request, 'common');
+  const title = t("headTitle");
+  return json({ locale, title });
 };
 
-export function meta() {
-  return { title: "New Remix App" };
+export function meta({ data }) {
+  return { title: data.title };
 }
 
 export default function App() {
-  let { i18n } = useTranslation();
-  let { locale } = useLoaderData();
+  const { i18n } = useTranslation();
+  const { locale } = useLoaderData();
   useRemixI18Next(locale);
 
   return (

@@ -21,7 +21,7 @@ export const loader = async ({ request }) => {
   let options = {};
   if (lngInQuery) { // on language change vie lng search param, save selection to cookie
     options.headers = {
-      "Set-Cookie": await createCookie('locale').serialize(lngInQuery)
+      "Set-Cookie": await createCookie('locale').serialize(locale)
     };
   }
   return json({ locale, title }, options);
